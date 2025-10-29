@@ -1,4 +1,5 @@
 /*Read a n-length of characters and store them in an array*/
+//Revised to use pointers to keep track of current position in array
 
 #include <stdio.h>
 #define N 150
@@ -10,25 +11,25 @@ int main(void)
     char str[N];
 
     printf("Enter the characters\n");
+    char *p = str;
 
     //Read until newline or buffer full
     do 
     {
         ch = getchar();
-        str[i++] = ch;
+        *p = ch;
+            p++;
 
-    } while (ch != '\n' && i < N - 1);
+    } while (ch != '\n' && p < str + N - 1);
 
-    str[i] = '\0';
+    *p = '\0';
 
     printf("Entered characters are: %s\n", str); //str is a pointer to &str[0], chapter 12 on c a modern approach
 
+    p--; //We use the pointer position to reverse it
 
-
-    for (i; i >= 0; i--)
+    for (p; p >= str; p--)
     {
-        printf("%c", str[i]);
+        printf("%c", *p);
     }
 }
-
-//TODO : Rewrite this to use a pointer instead of an integer to keep track of current position in the array
