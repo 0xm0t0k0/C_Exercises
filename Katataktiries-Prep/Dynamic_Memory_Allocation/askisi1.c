@@ -27,11 +27,17 @@ int main(void) {
 	}
 
 	int total_bytes = 0;
+	//Calculate total bytes allocated
+	for (int i = 0; i < M; i++) {
+		total_bytes += sizeof(int) * N; //Bytes for each row
+	}
+	
 
 	for (int i = 0; i < M; i++) {
 		free(p[i]);
 	}
 	free(p);
+	printf("Total bytes allocated: %d\n", total_bytes);
 	return 0;
 }
 
